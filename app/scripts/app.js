@@ -15,7 +15,8 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'oi.file'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -31,8 +32,19 @@ angular
       })
       .when('/posts', {
         templateUrl: 'views/posts/main.html',
-        controller: 'PostsController',
-        controllerAs: 'posts'
+        controller: 'PostsController'
+      }).
+      when('/posts/create', {
+        templateUrl: 'views/posts/form.html',
+        controller: 'PostsController'
+      }).
+      when('/posts/:postId', {
+        templateUrl: 'views/posts/show.html',
+        controller: 'PostsController'
+      }).
+      when('/posts/:postId/edit', {
+        templateUrl: 'views/posts/form.html',
+        controller: 'PostsController'
       }).
       when('/categories', {
         templateUrl: 'views/categories/main.html',
