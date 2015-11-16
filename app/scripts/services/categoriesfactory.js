@@ -14,8 +14,7 @@ angular
       return {
         index: function() {
           //console.log($http.get("/category"))
-
-            return $http.get("http://blogapi.dev/category");
+          return $http.get("http://blogapi.dev/category");
         },
         show: function(id) {
            return $http.get("http://blogapi.dev/category/"+id);

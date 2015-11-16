@@ -40,7 +40,7 @@ function CategoriescontrollerCtrl($scope,$route,$http,$routeParams,categories_se
 
     $scope.submit = function() {
         
-
+        
     if(location == "/categories/create") {
         categories_service.store( $scope.categoryData )
         .then(function(response) {
