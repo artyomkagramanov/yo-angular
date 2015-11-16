@@ -15,15 +15,13 @@ $scope.options = {
   change: function (file) {
       //В file содержится информация о файле
       //Загружаем на сервер
-      console.log(file)
       file.$upload('http://blogapi.dev/post/image-upload', $scope.file).then(function(data){
       		$scope.postData.image = data.data.image_name;
 
-      		//alert($scope.file.filename)
       });
       
     }
-  }
+  };
 
 
 }]);
