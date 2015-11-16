@@ -9,7 +9,7 @@
  */
 angular
     .module('blogApp')
-    .factory('posts_service', ['$http', function($http) {
+    .factory('PostsFactory', ['$http', function($http) {
       return {
         index: function() {
            return $http.get("http://blogapi.dev/post");

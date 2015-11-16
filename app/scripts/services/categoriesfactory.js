@@ -9,13 +9,13 @@
  */
 angular
     .module('blogApp')
-    .factory('categories_service', ['$http', function($http) {
+    .factory('CategoriesFactory', ['$http', function($http) {
 
       return {
         index: function() {
           //console.log($http.get("/category"))
 
-           return $http.get("http://blogapi.dev/category");
+            return $http.get("http://blogapi.dev/category");
         },
         show: function(id) {
            return $http.get("http://blogapi.dev/category/"+id);

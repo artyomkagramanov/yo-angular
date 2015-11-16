@@ -16,7 +16,7 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'oi.file'
+
   ])
   .config(function ($routeProvider) {
     $routeProvider

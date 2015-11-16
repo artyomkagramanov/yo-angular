@@ -10,14 +10,19 @@
 
 
   angular.module('blogApp')
-.controller('PostsController', ['$scope','$route', '$http','$location','$routeParams','posts_service','categories_service',PostsController]);
+.controller('PostscontrollerCtrl', ['$scope','$route', '$http','$location','$routeParams','PostsFactory','CategoriesFactory',PostscontrollerCtrl]);
     
-function PostsController($scope,$route,$http,$location,$routeParams,posts_service,categories_service)
+function PostscontrollerCtrl($scope,$route,$http,$location,$routeParams,posts_service,categories_service)
 { 
 
 
    var location = $location.url();
    var id = $routeParams.postId;
+  this.awesomeThings = [
+  'HTML5 Boilerplate',
+  'AngularJS',
+  'Karma'
+];
 
     switch(location) 
     {

@@ -7,9 +7,14 @@
  * # FilecontrollerCtrl
  * Controller of the blogApp
  */
-angular.module('blogApp').controller('FileController', ['$scope', '$http','$location','$routeParams','posts_service','categories_service', function($scope,$http,$location,$routeParams,posts_service,categories_service){ 
+angular.module('blogApp').controller('FilecontrollerCtrl', ['$scope', '$http','$location','$routeParams',function($scope,$http,$location,$routeParams){ 
 
 $scope.file = {} //Модель
+this.awesomeThings = [
+  'HTML5 Boilerplate',
+  'AngularJS',
+  'Karma'
+];
 $scope.options = {
   //Вызывается для каждого выбранного файла
   change: function (file) {

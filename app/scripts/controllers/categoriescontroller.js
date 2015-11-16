@@ -8,13 +8,18 @@
  * Controller of the blogApp
  */
 angular.module('blogApp')
-.controller('CategoriesController', ['$scope','$route', '$http','$routeParams','categories_service','$location', CategoriesController]);
+.controller('CategoriescontrollerCtrl', ['$scope','$route', '$http','$routeParams','CategoriesFactory','$location', CategoriescontrollerCtrl]);
 
-function CategoriesController($scope,$route,$http,$routeParams,categories_service,$location) 
+function CategoriescontrollerCtrl($scope,$route,$http,$routeParams,categories_service,$location) 
 { 
    
    var location = $location.url();
    var id = $routeParams.categoryId;
+   this.awesomeThings = [
+      'HTML5 Boilerplate',
+      'AngularJS',
+      'Karma'
+    ];
 
     switch(location) 
     {
