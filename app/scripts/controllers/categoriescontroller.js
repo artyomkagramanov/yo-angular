@@ -8,40 +8,46 @@
  * Controller of the blogApp
  */
 angular.module('blogApp')
-.controller('CategoriescontrollerCtrl', ['$scope','$route', '$http','$routeParams','CategoriesFactory','$location', CategoriescontrollerCtrl]);
+.controller('CategoriescontrollerCtrl', ['$scope','$route','$routeParams','CategoriesFactory','$location', CategoriescontrollerCtrl]);
 
-function CategoriescontrollerCtrl($scope,$route,$http,$routeParams,categories_service,$location) 
+function CategoriescontrollerCtrl($scope,$route,$routeParams,categories_service,$location) 
 { 
-   
-   var location = $location.url();
-   var id = $routeParams.categoryId;
+   $scope.location = $location.url();
+   var location = $scope.location ;
+   var id = $routeParams.categoryId ? $routeParams.categoryId : undefined;
    this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
+    $scope.index = index;
+    $scope.edit = edit;
+    $scope.show = show;
+    $scope.submit = submit;
+    $scope.deleteCategory = deleteCategory;
+    $scope.categoryData = {title:undefined};
+
 
     switch(location) 
     {
-        case '/categories' : index() ; break ;
-        case '/categories/' + id + '/edit'    : edit(id) ; break ;
-        case '/categories/' + id : show() ; break ;
+        case '/categories' : $scope.index() ; break ;
+        case '/categories/' + id + '/edit'    : $scope.edit(id) ; break ;
+        case '/categories/' + id : $scope.show() ; break ;
     }
 
+    
+/////////////////////////////////////////////////// tested
     function index() 
     {
         categories_service.index()
-        .success(function(data){
-            
-            $scope.categories = data;  
-            console.log($scope.categories)  ;                    
-        })
+            .then(function(response){
+                $scope.categories = response.data;  
+            });
     }
 
-    $scope.submit = function() {
+    function submit(id) {
         
-        
-    if(location == "/categories/create") {
+    if($location.url() == "/categories/create") {
         categories_service.store( $scope.categoryData )
         .then(function(response) {
             if (response.data.status == "success") {
@@ -67,15 +73,15 @@ function CategoriescontrollerCtrl($scope,$route,$http,$routeParams,categories_se
     }
 
 
-
+/////////////////////////////////////////////// tested
    function edit(id) {
     categories_service.show( id )
     .success(function(data) {
-        $scope.categoryData.title=data.title
+        $scope.categoryData.title = data.title
         })
    }    
-
-    function show() 
+/////////////////////////////////////////////////// tested
+    function show(id) 
     { 
         categories_service.show(id)
         .success(function(data){
@@ -83,7 +89,7 @@ function CategoriescontrollerCtrl($scope,$route,$http,$routeParams,categories_se
         })                    
     } 
 
-    $scope.deleteCategory = function(id){
+    function deleteCategory(id){
         categories_service.delete( id )
         .success(function() {
             $route.reload(); 

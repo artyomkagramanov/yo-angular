@@ -10,29 +10,33 @@
 
 
   angular.module('blogApp')
-.controller('PostscontrollerCtrl', ['$scope','$route', '$http','$location','$routeParams','PostsFactory','CategoriesFactory',PostscontrollerCtrl]);
+.controller('PostscontrollerCtrl', ['$scope','$route','$location','$routeParams','PostsFactory','CategoriesFactory',PostscontrollerCtrl]);
     
-function PostscontrollerCtrl($scope,$route,$http,$location,$routeParams,posts_service,categories_service)
+function PostscontrollerCtrl($scope,$route,$location,$routeParams,posts_service,categories_service)
 { 
 
 
    var location = $location.url();
    var id = $routeParams.postId;
-  this.awesomeThings = [
-  'HTML5 Boilerplate',
-  'AngularJS',
-  'Karma'
-];
+
+
+    $scope.index = index;
+    $scope.create = create;
+    $scope.show = show;
+    $scope.edit = edit;
+    $scope.submit = submit;
+    $scope.deletePost = deletePost;
+    $scope.selectPostsByCategoryId = selectPostsByCategoryId;
 
     switch(location) 
     {
-        case '/posts' : index() ; break ;
-        case '/posts/create'  : create() ; break ;
-        case '/posts/' + id + '/edit'    : edit(id) ; break ;
-        default : show();
+        case '/posts' :  $scope.index() ; break ;
+        case '/posts/create'  :  $scope.create() ; break ;
+        case '/posts/' + id + '/edit'    :  $scope.edit(id) ; break ;
+        case 'posts/' + id :  $scope.show(id);
     }
 
-    $scope.selectPostsByCategoryId = selectPostsByCategoryId;
+    
 
     function selectPostsByCategoryId(){
         if($scope.postData.categories_ids){
@@ -45,12 +49,12 @@ function PostscontrollerCtrl($scope,$route,$http,$location,$routeParams,posts_se
     }
 
     function index() {
-        create(); 
+        
 		posts_service.index()
-        .success(function(data){
-            $scope.posts = data;                        
-        })
-        //console.log($scope.postData.categories_ids)
+        .then(function(response){
+            $scope.posts = response.data;  
+        });
+        
 	}
 
 
@@ -63,8 +67,7 @@ function PostscontrollerCtrl($scope,$route,$http,$location,$routeParams,posts_se
         })
     }
 
-	function show() {
-		var id = $routeParams.postId;
+	function show(id) {
 		posts_service.show(id)
         .success(function(data){
             $scope.post = data;                        
@@ -75,18 +78,18 @@ function PostscontrollerCtrl($scope,$route,$http,$location,$routeParams,posts_se
         create();
         posts_service.show( id )
         .success(function(data) {
-                $scope.postData=data;
+            $scope.postData=data;
         })
     }
 
 
 
 
-    $scope.submit = function() { 
+    function submit(id) { 
 
-        console.log($scope.postData)
+        
         var inputs = $scope.postData;
-        if(location == "/posts/create") {
+        if($location.url() == "/posts/create") {
             posts_service.store(inputs).then(function(response){
                 if (response.data.status == "success")  {
                         $location.path('/posts');
@@ -109,7 +112,7 @@ function PostscontrollerCtrl($scope,$route,$http,$location,$routeParams,posts_se
         }   
     }
 
-    $scope.deletePost = function(id){
+    function deletePost(id){
         posts_service.delete(id)
         .success(function() {
             $route.reload();

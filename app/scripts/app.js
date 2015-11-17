@@ -32,35 +32,35 @@ angular
       })
       .when('/posts', {
         templateUrl: 'views/posts/main.html',
-        controller: 'PostsController'
+        controller: 'PostscontrollerCtrl'
       }).
       when('/posts/create', {
         templateUrl: 'views/posts/form.html',
-        controller: 'PostsController'
+        controller: 'PostscontrollerCtrl'
       }).
       when('/posts/:postId', {
         templateUrl: 'views/posts/show.html',
-        controller: 'PostsController'
+        controller: 'PostscontrollerCtrl'
       }).
       when('/posts/:postId/edit', {
         templateUrl: 'views/posts/form.html',
-        controller: 'PostsController'
+        controller: 'PostscontrollerCtrl'
       }).
       when('/categories', {
         templateUrl: 'views/categories/main.html',
-        controller: 'CategoriesController'
+        controller: 'CategoriescontrollerCtrl'
       }).
       when('/categories/create', {
         templateUrl: 'views/categories/form.html',
-        controller: 'CategoriesController'
+        controller: 'CategoriescontrollerCtrl'
       }).
       when('/categories/:categoryId', {
         templateUrl: 'views/categories/show.html',
-        controller: 'CategoriesController'
+        controller: 'CategoriescontrollerCtrl'
       }).
       when('/categories/:categoryId/edit', {
         templateUrl: 'views/categories/form.html',
-        controller: 'CategoriesController'
+        controller: 'CategoriescontrollerCtrl'
       })
       .otherwise({
         redirectTo: '/'
